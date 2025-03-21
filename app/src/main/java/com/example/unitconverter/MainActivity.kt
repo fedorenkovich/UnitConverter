@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material3.Button
@@ -27,6 +28,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
@@ -41,6 +43,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.input.KeyboardType
 import com.example.unitconverter.ui.theme.UnitConverterTheme
 import kotlin.math.roundToInt
 
@@ -129,11 +132,24 @@ fun UnitConverter(){
             )
             Spacer(modifier = Modifier.height(16.dp))
             OutlinedTextField(
-                value = inputValue, onValueChange = {
+                value = inputValue,
+                onValueChange = {
                     inputValue = it
                     convertUnits()
                 },
-                label = { Text("Enter Value") })
+                label = { Text("Enter Value") },
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                colors = TextFieldDefaults.colors(
+                    focusedTextColor = MaterialTheme.colorScheme.onSurface, // Цвет текста при фокусе
+                    unfocusedTextColor = MaterialTheme.colorScheme.onSurface, // Цвет текста без фокуса
+                    focusedContainerColor = MaterialTheme.colorScheme.surface, // Цвет фона при фокусе
+                    unfocusedContainerColor = MaterialTheme.colorScheme.surface, // Цвет фона без фокуса
+                    focusedIndicatorColor = MaterialTheme.colorScheme.primary, // Цвет индикатора при фокусе
+                    unfocusedIndicatorColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5f), // Цвет индикатора без фокуса
+                    focusedLabelColor = MaterialTheme.colorScheme.primary, // Цвет лейбла при фокусе
+                    unfocusedLabelColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5f) // Цвет лейбла без фокуса
+                )
+            )
             Spacer(modifier = Modifier.height(16.dp))
             Row {
                 //Input Box
